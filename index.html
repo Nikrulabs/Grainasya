@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grainasya: Exporting Sustainable Indian Millets</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FDFBF6; }
+        h1, h2, h3 { font-family: 'Lora', serif; }
+        .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+        @media (min-width: 768px) { .chart-container { height: 350px; max-height: 400px; } }
+        .map-pin { position: absolute; transform: translate(-50%, -50%); width: 16px; height: 16px; background-color: #A0522D; border-radius: 9999px; border: 2px solid #FDFBF6; cursor: pointer; transition: all 0.3s ease; }
+        .map-pin:hover, .map-pin.active { transform: translate(-50%, -50%) scale(1.5); background-color: #739072; }
+        .nav-link.active { color: #A0522D; border-bottom-color: #A0522D; }
+    </style>
+</head>
+<body class="bg-[#FDFBF6] text-[#3C3633]">
+    <!-- Chosen Palette: Earth & Harvest -->
+    <!-- Application Structure Plan: A 'narrative dashboard' structure was chosen over a linear slide-by-slide format to empower user-led exploration. This design guides a potential partner from the high-level 'Why' (Opportunity) to the detailed 'What' (Products) and 'How' (Model & Strategy), culminating in a clear 'Who/Next' (Founder & CTA). A sticky navigation allows non-linear access to key sections, catering to different user priorities (e.g., a buyer might jump to 'Products', an investor to 'Strategy'). This architecture transforms a static pitch into an engaging, interactive discovery tool, making complex information digestible and accessible. -->
+    <!-- Visualization & Content Choices: 
+        - Opportunity Section: Report Info (Market Size, India's Share, Target Markets) -> Goal (Convince of potential) -> Viz (Dynamic cards, Pie Chart, Interactive Map) -> Interaction (Click map regions to reveal detailed text) -> Justification (Makes abstract data tangible and geographically relevant) -> Library (Chart.js for pie chart, Vanilla JS for map interaction).
+        - Product Section: Report Info (Product List) -> Goal (Showcase range and details) -> Viz (Filterable grid of product cards) -> Interaction (Click category buttons to filter products) -> Justification (Transforms a long list into an organized, explorable catalog) -> Library (Vanilla JS).
+        - Model Section: Report Info (Sourcing, Certs, Brand Values) -> Goal (Build trust and show operational excellence) -> Viz (HTML/CSS Flowchart, Logo Grid, Icon-based Value Cards) -> Interaction (Static visual display) -> Justification (Visually breaks down complex processes and concepts into easy-to-understand diagrams) -> Library (None).
+        - Strategy Section: Report Info (Sales Phases, Revenue Margins) -> Goal (Demonstrate clear GTM plan and profitability) -> Viz (Phased Diagram, Interactive Bar Chart) -> Interaction (Hover over bars to see detailed revenue data) -> Justification (Clarifies strategic phasing and makes financial data interactive and less intimidating) -> Library (Chart.js for bar chart).
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <header id="header" class="bg-[#FDFBF6]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-[#A0522D] font-serif">Grainasya</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#opportunity" class="nav-link text-gray-600 hover:text-[#A0522D] transition-colors pb-1 border-b-2 border-transparent">The Opportunity</a>
+                <a href="#products" class="nav-link text-gray-600 hover:text-[#A0522D] transition-colors pb-1 border-b-2 border-transparent">Our Products</a>
+                <a href="#model" class="nav-link text-gray-600 hover:text-[#A0522D] transition-colors pb-1 border-b-2 border-transparent">Our Model</a>
+                <a href="#strategy" class="nav-link text-gray-600 hover:text-[#A0522D] transition-colors pb-1 border-b-2 border-transparent">Global Strategy</a>
+            </div>
+            <a href="#partner" class="hidden md:block bg-[#739072] text-white px-4 py-2 rounded-md hover:bg-[#A0522D] transition-all">Partner With Us</a>
+            <button id="mobile-menu-button" class="md:hidden text-2xl">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-[#FDFBF6] shadow-lg">
+            <a href="#opportunity" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">The Opportunity</a>
+            <a href="#products" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Our Products</a>
+            <a href="#model" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Our Model</a>
+            <a href="#strategy" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Global Strategy</a>
+            <a href="#partner" class="block text-center py-3 px-4 text-sm bg-[#739072] text-white hover:bg-[#A0522D]">Partner With Us</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="py-20 md:py-32 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1627859231945-833509176467?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3');">
+            <div class="container mx-auto px-6 text-center bg-black/50 backdrop-blur-sm rounded-lg py-12">
+                <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Unlocking Global Health & Sustainability</h1>
+                <p class="mt-4 text-lg md:text-xl text-gray-200">Transforming ancient Indian millets into a contemporary, nourishing, and eco-conscious food solution for the world.</p>
+                <a href="#opportunity" class="mt-8 inline-block bg-[#A0522D] text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-transform hover:scale-105">Explore the Opportunity</a>
+            </div>
+        </section>
+
+        <section id="opportunity" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold">A Confluence of Global Trends</h2>
+                    <p class="mt-4 text-lg text-gray-600">The global market is at a pivotal inflection point. A powerful combination of rising health consciousness, the demand for sustainable food systems, and the legacy of the UN's International Year of Millets has created an unprecedented opportunity. Grainasya is perfectly positioned to meet this demand, leveraging India's strategic advantages in production and infrastructure.</p>
+                </div>
+
+                <div class="mt-12 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <div class="text-4xl font-bold text-[#A0522D]">$7.5B+</div>
+                            <p class="mt-2 text-gray-600">Projected Gluten-Free Market by 2027</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                            <div class="text-4xl font-bold text-[#A0522D]">Plant-Based</div>
+                            <p class="mt-2 text-gray-600">Shift to Sustainable, Eco-Conscious Diets</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 col-span-1 sm:col-span-2">
+                             <h3 class="text-xl font-semibold mb-4 text-center">India's Global Millet Production Share</h3>
+                             <div class="chart-container h-64 md:h-72">
+                                 <canvas id="marketShareChart"></canvas>
+                             </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-center md:text-left">Strategic Target Markets</h3>
+                        <p class="text-gray-600 mb-6 text-center md:text-left">Our strategy is data-driven, targeting key regions where demand aligns with our strengths. Click on a region to explore our tailored approach.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div class="bg-gray-200 rounded-lg p-4 relative h-64 md:h-80 bg-cover" style="background-image: url('https://placehold.co/600x400/E0A75E/3C3633?text=World+Map');">
+                                <div class="map-pin" data-market="usa" style="top: 30%; left: 20%;"></div>
+                                <div class="map-pin" data-market="eu" style="top: 25%; left: 48%;"></div>
+                                <div class="map-pin" data-market="gcc" style="top: 55%; left: 60%;"></div>
+                                <div class="map-pin" data-market="sea" style="top: 65%; left: 80%;"></div>
+                            </div>
+                            <div id="market-details" class="bg-white p-6 rounded-lg shadow-inner border border-gray-200">
+                                <h4 id="market-title" class="text-xl font-semibold text-[#A0522D]">Select a Region</h4>
+                                <p id="market-drivers" class="mt-2 text-gray-600">Click a pin on the map to see the market drivers, product focus, and growth opportunities for that region.</p>
+                                <div class="mt-4">
+                                    <strong id="market-focus-title" class="block text-gray-700"></strong>
+                                    <p id="market-focus" class="text-gray-600"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold">From Grain to Gastronomy</h2>
+                    <p class="mt-4 text-lg text-gray-600">Our diverse product portfolio is designed to meet global needs, offering everything from premium raw grains to innovative, convenient food solutions. Explore our categories to discover how Grainasya is bringing wholesome goodness to the world's tables.</p>
+                </div>
+                <div id="product-filters" class="mt-10 flex flex-wrap justify-center gap-2 md:gap-4">
+                </div>
+                <div id="product-grid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                </div>
+            </div>
+        </section>
+        
+        <section id="model" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold">Our Sustainable & Ethical Model</h2>
+                    <p class="mt-4 text-lg text-gray-600">Our foundation is built on more than just business; it's a commitment to ethical practices, farmer empowerment, and uncompromising quality. This section explains how we operate, from the farm to your shelf, ensuring every product is pure, sustainable, and trustworthy.</p>
+                </div>
+
+                <div class="mt-16 grid lg:grid-cols-3 gap-12">
+                    <div class="lg:col-span-1">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Farm-to-Fork Sourcing</h3>
+                        <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-gray-200 before:pointer-events-none">
+                            <div class="pl-10 relative">
+                                <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">1</div>
+                                <h4 class="font-bold text-lg">Ethical FPO Partnerships</h4>
+                                <p class="text-sm text-gray-600">Direct partnerships in Telangana & AP ensure fair prices for farmers and consistent quality.</p>
+                            </div>
+                            <div class="pl-10 relative">
+                                <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">2</div>
+                                <h4 class="font-bold text-lg">Organic & Regenerative Farming</h4>
+                                <p class="text-sm text-gray-600">We champion pesticide-free cultivation, promoting soil health and water conservation.</p>
+                            </div>
+                            <div class="pl-10 relative">
+                                <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">3</div>
+                                <h4 class="font-bold text-lg">Rigorous Quality Control</h4>
+                                <p class="text-sm text-gray-600">End-to-end testing from farm-gate to packaging ensures purity and safety.</p>
+                            </div>
+                            <div class="pl-10 relative">
+                                <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">4</div>
+                                <h4 class="font-bold text-lg">Full Traceability</h4>
+                                <p class="text-sm text-gray-600">Complete transparency from farm to final product, building unshakable trust.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2">
+                        <div class="mb-12">
+                            <h3 class="text-2xl font-bold mb-6 text-center">Global Compliance & Certifications</h3>
+                            <div id="certs-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 place-items-center text-center text-xs text-gray-500">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold mb-6 text-center">The Grainasya Brand Promise</h3>
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                    <h4 class="font-bold text-lg text-[#A0522D]">Climate-Resilient Grains</h4>
+                                    <p class="mt-2 text-gray-600">Superior nutrition with minimal environmental impact.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                    <h4 class="font-bold text-lg text-[#A0522D]">Pure & Wholesome Processing</h4>
+                                    <p class="mt-2 text-gray-600">Zero-additive processing for uncompromised natural goodness.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                    <h4 class="font-bold text-lg text-[#A0522D]">Ethical Farmer Empowerment</h4>
+                                    <p class="mt-2 text-gray-600">Fair pricing and support for rural communities with every purchase.</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
+                                    <h4 class="font-bold text-lg text-[#A0522D]">Innovation & Convenience</h4>
+                                    <p class="mt-2 text-gray-600">Modern, delicious products for contemporary healthy lifestyles.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="strategy" class="py-16 md:py-24 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold">Our Global Go-to-Market Strategy</h2>
+                    <p class="mt-4 text-lg text-gray-600">We have a clear, phased strategy to maximize global reach and ensure sustainable growth. This section outlines our approach to market entry and the robust, profitable revenue model that underpins our operations.</p>
+                </div>
+                <div class="mt-16 grid lg:grid-cols-5 gap-12 items-center">
+                    <div class="lg:col-span-3">
+                        <h3 class="text-2xl font-bold mb-6 text-center">Multi-Channel Sales Phases</h3>
+                        <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-4">
+                             <div class="flex-1 text-center p-4">
+                                <div class="font-bold text-white bg-[#A0522D] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">1</div>
+                                <h4 class="font-bold text-lg">B2B Penetration</h4>
+                                <p class="text-sm text-gray-600">Leverage B2B platforms, trade meets, and direct importer partnerships for foundational volume.</p>
+                            </div>
+                             <div class="hidden md:block self-center text-gray-300 text-2xl font-bold">→</div>
+                             <div class="flex-1 text-center p-4">
+                                <div class="font-bold text-white bg-[#739072] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">2</div>
+                                <h4 class="font-bold text-lg">Retail Expansion</h4>
+                                <p class="text-sm text-gray-600">Enter e-commerce, ethnic retail, and specialty health stores to build brand awareness.</p>
+                            </div>
+                             <div class="hidden md:block self-center text-gray-300 text-2xl font-bold">→</div>
+                             <div class="flex-1 text-center p-4">
+                                <div class="font-bold text-white bg-[#E0A75E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">3</div>
+                                <h4 class="font-bold text-lg">Strategic Partnerships</h4>
+                                <p class="text-sm text-gray-600">Achieve scale via white-labeling, JVs, and institutional sales.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lg:col-span-2">
+                        <h3 class="text-2xl font-bold mb-4 text-center">Profitability Snapshot</h3>
+                        <p class="text-sm text-gray-600 text-center mb-4">Hover over bars for details. Our model is built for profitable, scalable growth.</p>
+                        <div class="chart-container h-80">
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="partner" class="py-16 md:py-24">
+            <div class="container mx-auto px-6">
+                <div class="text-center max-w-3xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold">Partner With a Visionary Leader</h2>
+                     <p class="mt-4 text-lg text-gray-600">Grainasya is led by a founder with the expertise and passion to navigate the global market. We are not just seeking clients; we are looking for strategic partners to join us in cultivating the future of food.</p>
+                </div>
+
+                 <div class="mt-12 max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8 md:flex md:items-center md:gap-8">
+                    <div class="md:w-1/3 text-center">
+                        <img src="https://placehold.co/200x200/739072/FFFFFF?text=Dr.Y" alt="Dr. Lakshmi Yarram" class="w-40 h-40 rounded-full mx-auto shadow-md">
+                        <h3 class="mt-4 text-2xl font-bold">Dr. Lakshmi Yarram</h3>
+                        <p class="text-[#A0522D] font-semibold">Founder & CEO</p>
+                        <p class="text-sm text-gray-500 mt-2">25+ Years in Global QA, Strategy & Sustainability</p>
+                    </div>
+                    <div class="mt-8 md:mt-0 md:w-2/3">
+                        <h4 class="text-xl font-bold mb-4">Let's Cultivate the Future of Food, Together.</h4>
+                        <p class="text-gray-600 mb-6">We are actively seeking strategic buyers, channel partners, and co-branding collaborators. With our first export shipment ready by Q3 2025, the time to act is now.</p>
+                        <div class="space-y-3 text-gray-700">
+                           <p><strong>Email:</strong> <a href="mailto:lakshmi.yarram@gmail.com" class="text-[#A0522D] hover:underline">lakshmi.yarram@gmail.com</a></p>
+                           <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/lakshmiyarram" target="_blank" class="text-[#A0522D] hover:underline">linkedin.com/in/lakshmiyarram</a></p>
+                           <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
+                        </div>
+                        <a href="#" class="mt-6 inline-block w-full text-center bg-[#A0522D] text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-all">Request a Detailed Product Catalog</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <footer class="bg-[#3C3633] text-white mt-16">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="font-serif text-2xl text-[#E0A75E]">Grainasya</p>
+            <p class="mt-2 text-sm text-gray-400">From Earth to Heart — Naturally.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#opportunity" class="hover:text-[#E0A75E]">Opportunity</a>
+                <a href="#products" class="hover:text-[#E0A75E]">Products</a>
+                <a href="#model" class="hover:text-[#E0A75E]">Model</a>
+                <a href="#partner" class="hover:text-[#E0A75E]">Partner</a>
+            </div>
+             <p class="mt-8 text-xs text-gray-500">&copy; 2025 Grainasya. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const appData = {
+            marketData: {
+                usa: {
+                    title: 'USA & Canada',
+                    drivers: 'High health consciousness, large gluten-free market, and strong demand for premium organic and ready-to-eat (RTE) snacks.',
+                    focusTitle: 'Product Focus:',
+                    focus: 'Certified Organic Millets (raw), Gourmet Millet Flours, Premium RTE Snacks (cookies, granola bars).'
+                },
+                eu: {
+                    title: 'EU (Germany, NL, France)',
+                    drivers: 'Strict organic certifications, strong ethical sourcing demand, and innovation in the bakery and snack sectors.',
+                    focusTitle: 'Product Focus:',
+                    focus: 'EU Organic Certified Flours (Atta), Specialty Millet Pastas/Noodles, Zero-Additive Baby Food.'
+                },
+                gcc: {
+                    title: 'UAE & GCC',
+                    drivers: 'Strong Indian diaspora, growing local health awareness, and demand for both bulk grains and specialty ingredients for HORECA.',
+                    focusTitle: 'Product Focus:',
+                    focus: 'Bulk Whole Grains (Foxtail, Pearl), Traditional Indian Millet Flours, Convenient Instant Mixes.'
+                },
+                sea: {
+                    title: 'Southeast Asia',
+                    drivers: 'Rising disposable incomes, growing middle class, and high demand for quick-cook, healthy, and functional foods.',
+                    focusTitle: 'Product Focus:',
+                    focus: 'Millet Noodles, Instant Porridge Mixes, Millet-based Functional Foods, RTE Snack options.'
+                }
+            },
+            products: [
+                { id: 1, category: 'Core Grains', name: 'Foxtail Millet', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Foxtail+Millet', desc: 'Rich in protein and iron; naturally gluten-free.' },
+                { id: 2, category: 'Core Grains', name: 'Finger Millet (Ragi)', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Ragi', desc: 'A powerhouse of calcium, iron, and dietary fiber.' },
+                { id: 3, category: 'Core Grains', name: 'Pearl Millet (Bajra)', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Bajra', desc: 'High in protein and magnesium, excellent for energy.' },
+                { id: 4, category: 'Millet Flours', name: 'Organic Ragi Atta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Ragi+Flour', desc: 'Finely ground, ideal for rotis, dosas, and baking.' },
+                { id: 5, category: 'Millet Flours', name: 'Multi-Millet Atta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Multi-Millet+Flour', desc: 'A custom blend for enhanced nutrition and versatility.' },
+                { id: 6, category: 'RTE Snacks', name: 'Millet Cookies', img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Millet+Cookies', desc: 'Baked with jaggery, preservative-free wholesome indulgence.' },
+                { id: 7, category: 'RTE Snacks', name: 'Roasted Millet Puffs', img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Millet+Puffs', desc: 'Lightly seasoned, a healthy alternative to fried snacks.' },
+                { id: 8, 'category': 'Instant & Convenience', name: 'Millet Porridge Mix', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Porridge+Mix', desc: 'Just add hot water for a quick, nutritious breakfast.' },
+                { id: 9, 'category': 'Instant & Convenience', name: 'Millet Baby Food', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Baby+Food', desc: 'Specially formulated, nutrient-dense, and easily digestible.' },
+                { id: 10, 'category': 'Value-Added', name: 'Millet Noodles', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Millet+Noodles', desc: 'No MSG, quick-cook, and packed with millet goodness.' },
+                { id: 11, 'category': 'Value-Added', name: 'Millet Pasta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Millet+Pasta', desc: 'Gluten-free, high-protein alternative to wheat pasta.' },
+            ],
+            certs: [
+                { name: 'FSSAI', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=FSSAI', status: 'Registered' },
+                { name: 'APEDA', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=APEDA', status: 'Registered' },
+                { name: 'USDA Organic', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=USDA+Organic', status: 'Planned' },
+                { name: 'EU Organic', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=EU+Organic', status: 'Planned' },
+                { name: 'HACCP', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=HACCP', status: 'Planned' },
+                { name: 'Gluten-Free', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=Gluten-Free', status: 'Planned' },
+                { name: 'TCFD', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=TCFD', status: 'Aligned' },
+                { name: 'IFRS S2', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=IFRS+S2', status: 'Aligned' },
+            ],
+            revenue: {
+                labels: ['Raw Foxtail', 'Organic Flour', 'RTE Cookies'],
+                margins: [240, 260, 300],
+                buyPrices: [35, 45, 80],
+                sellPrices: [1.80, 2.20, 3.50],
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            const sections = document.querySelectorAll('main section[id]');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                           link.classList.remove('active');
+                           if(link.getAttribute('href').substring(1) === entry.target.id) {
+                               link.classList.add('active');
+                           }
+                        });
+                    }
+                });
+            }, { rootMargin: '-50% 0px -50% 0px' });
+            sections.forEach(section => observer.observe(section));
+
+
+            const marketShareCtx = document.getElementById('marketShareChart').getContext('2d');
+            new Chart(marketShareCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['India', 'Rest of World'],
+                    datasets: [{
+                        data: [40, 60],
+                        backgroundColor: ['#A0522D', '#E0A75E'],
+                        borderColor: '#FDFBF6',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw}% of Global Production`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(revenueCtx, {
+                type: 'bar',
+                data: {
+                    labels: appData.revenue.labels,
+                    datasets: [{
+                        label: 'Gross Margin (%)',
+                        data: appData.revenue.margins,
+                        backgroundColor: ['#A0522D', '#739072', '#E0A75E'],
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    scales: {
+                        x: { beginAtZero: true, title: { display: true, text: 'Gross Margin (%)' } },
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const index = context.dataIndex;
+                                    const buy = appData.revenue.buyPrices[index];
+                                    const sell = appData.revenue.sellPrices[index];
+                                    return `Margin: ${context.raw}%. Buy: ₹${buy}/Kg. Sell: $${sell}/Kg.`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            const mapPins = document.querySelectorAll('.map-pin');
+            const marketTitle = document.getElementById('market-title');
+            const marketDrivers = document.getElementById('market-drivers');
+            const marketFocusTitle = document.getElementById('market-focus-title');
+            const marketFocus = document.getElementById('market-focus');
+            
+            mapPins.forEach(pin => {
+                pin.addEventListener('click', (e) => {
+                    const marketId = e.target.dataset.market;
+                    const data = appData.marketData[marketId];
+                    
+                    mapPins.forEach(p => p.classList.remove('active'));
+                    e.target.classList.add('active');
+                    
+                    marketTitle.textContent = data.title;
+                    marketDrivers.textContent = data.drivers;
+                    marketFocusTitle.textContent = data.focusTitle;
+                    marketFocus.textContent = data.focus;
+                });
+            });
+            mapPins[0].click();
+
+            const productFiltersContainer = document.getElementById('product-filters');
+            const productGrid = document.getElementById('product-grid');
+            const categories = ['All', ...new Set(appData.products.map(p => p.category))];
+
+            categories.forEach(category => {
+                const button = document.createElement('button');
+                button.textContent = category;
+                button.dataset.category = category;
+                button.className = 'px-4 py-2 text-sm font-medium rounded-md transition-all border';
+                if (category === 'All') {
+                    button.classList.add('bg-[#A0522D]', 'text-white', 'border-transparent');
+                } else {
+                    button.classList.add('bg-white', 'text-gray-600', 'hover:bg-gray-100', 'border-gray-200');
+                }
+                productFiltersContainer.appendChild(button);
+            });
+
+            const renderProducts = (filter) => {
+                productGrid.innerHTML = '';
+                const filteredProducts = filter === 'All' ? appData.products : appData.products.filter(p => p.category === filter);
+
+                filteredProducts.forEach(product => {
+                    const card = `
+                        <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:-translate-y-1 transition-transform duration-300">
+                            <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover">
+                            <div class="p-4">
+                                <h4 class="text-lg font-semibold">${product.name}</h4>
+                                <p class="text-sm text-gray-600 mt-1">${product.desc}</p>
+                                <div class="mt-3 text-xs font-semibold text-[#A0522D]">${product.category}</div>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.innerHTML += card;
+                });
+            };
+
+            productFiltersContainer.addEventListener('click', (e) => {
+                if(e.target.tagName === 'BUTTON') {
+                    const filter = e.target.dataset.category;
+                    renderProducts(filter);
+                    
+                    productFiltersContainer.querySelectorAll('button').forEach(btn => {
+                        btn.classList.remove('bg-[#A0522D]', 'text-white', 'border-transparent');
+                        btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+                    });
+                    e.target.classList.add('bg-[#A0522D]', 'text-white', 'border-transparent');
+                    e.target.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+                }
+            });
+            renderProducts('All');
+            
+            const certsGrid = document.getElementById('certs-grid');
+            appData.certs.forEach(cert => {
+                const certEl = `
+                    <div>
+                        <div class="bg-gray-100 p-3 rounded-md flex items-center justify-center h-16">
+                           <img src="${cert.img}" alt="${cert.name}" class="max-h-full max-w-full object-contain">
+                        </div>
+                        <p class="mt-2">${cert.status}</p>
+                    </div>
+                `;
+                certsGrid.innerHTML += certEl;
+            });
+
+        });
+    </script>
+</body>
+</html>
