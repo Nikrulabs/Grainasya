@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grainasya: Global Millet Exports - Bulk Orders</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts: Montserrat for headings, Open Sans for body text -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         /* General body styling for font and background */
-        body { font-family: 'Inter', sans-serif; background-color: #FDFBF6; }
-        /* Font styling for headings */
-        h1, h2, h3 { font-family: 'Lora', serif; }
+        body { font-family: 'Open Sans', sans-serif; background-color: #FDFBF6; }
+        /* Font styling for headings - now Montserrat */
+        h1, h2, h3 { font-family: 'Montserrat', sans-serif; }
         /* Chart container responsive sizing */
         .chart-container { position: relative; width: 100%; max-width: 450px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
         @media (min-width: 768px) { .chart-container { height: 350px; max-height: 400px; } }
@@ -60,12 +63,14 @@
             padding: 2rem;
             border-radius: 0.75rem;
             box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-            width: 90%;
-            max-width: 800px;
+            width: 95%; /* Adjust width for smaller appearance */
+            max-width: 600px; /* Reduced max-width for a more compact feel */
             position: relative;
             transform: scale(0.95);
             opacity: 0;
             transition: all 0.3s ease-out;
+            max-height: 90vh; /* Ensure modal doesn't exceed viewport height */
+            overflow-y: auto; /* Enable scroll if content still overflows */
         }
         .modal-overlay.open .modal-content {
             transform: scale(1);
@@ -135,8 +140,10 @@
                             <div class="text-4xl font-bold text-[#A0522D]">$7.5B+</div>
                             <p class="mt-2 text-gray-600">Projected Gluten-Free Market by 2027</p>
                         </div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                            <div class="text-4xl font-bold text-[#A0522D]">Plant-Based</div>
+                        <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 flex flex-col justify-center items-center">
+                            <div class="text-4xl font-bold text-[#A0522D] flex items-center justify-center">
+                                <i class="fas fa-leaf text-3xl mr-2"></i>Plant-Based
+                            </div>
                             <p class="mt-2 text-gray-600">Shift to Sustainable, Eco-Conscious Diets</p>
                         </div>
                         <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200 col-span-1 sm:col-span-2">
@@ -211,22 +218,22 @@
                         <div class="space-y-8 relative before:absolute before:inset-0 before:ml-5 before:h-full before:w-0.5 before:bg-gray-200 before:pointer-events-none">
                             <div class="pl-10 relative">
                                 <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">1</div>
-                                <h4 class="font-bold text-lg">Ethical FPO Partnerships</h4>
+                                <h4 class="font-bold text-lg flex items-center"><i class="fas fa-handshake text-xl mr-2"></i>Ethical FPO Partnerships</h4>
                                 <p class="text-sm text-gray-600">Direct partnerships in Telangana & AP ensure fair prices for farmers and consistent quality.</p>
                             </div>
                             <div class="pl-10 relative">
                                 <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">2</div>
-                                <h4 class="font-bold text-lg">Organic & Regenerative Farming</h4>
+                                <h4 class="font-bold text-lg flex items-center"><i class="fas fa-seedling text-xl mr-2"></i>Organic & Regenerative Farming</h4>
                                 <p class="text-sm text-gray-600">We champion pesticide-free cultivation, promoting soil health and water conservation.</p>
                             </div>
                             <div class="pl-10 relative">
                                 <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">3</div>
-                                <h4 class="font-bold text-lg">Rigorous Quality Control</h4>
+                                <h4 class="font-bold text-lg flex items-center"><i class="fas fa-check-circle text-xl mr-2"></i>Rigorous Quality Control</h4>
                                 <p class="text-sm text-gray-600">End-to-end testing from farm-gate to packaging ensures purity and safety.</p>
                             </div>
                             <div class="pl-10 relative">
                                 <div class="absolute -left-1.5 top-1 w-8 h-8 bg-[#A0522D] text-white rounded-full flex items-center justify-center font-bold">4</div>
-                                <h4 class="font-bold text-lg">Full Traceability</h4>
+                                <h4 class="font-bold text-lg flex items-center"><i class="fas fa-sync-alt text-xl mr-2"></i>Full Traceability</h4>
                                 <p class="text-sm text-gray-600">Complete transparency from farm to final product, building unshakable trust.</p>
                             </div>
                         </div>
@@ -242,19 +249,19 @@
                             <h3 class="text-2xl font-bold mb-6 text-center">The Grainasya Brand Promise</h3>
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                    <h4 class="font-bold text-lg text-[#A0522D]">Climate-Resilient Grains</h4>
+                                    <h4 class="font-bold text-lg text-[#A0522D] flex items-center"><i class="fas fa-sun text-xl mr-2"></i>Climate-Resilient Grains</h4>
                                     <p class="mt-2 text-gray-600">Superior nutrition with minimal environmental impact.</p>
                                 </div>
                                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                    <h4 class="font-bold text-lg text-[#A0522D]">Pure & Wholesome Processing</h4>
+                                    <h4 class="font-bold text-lg text-[#A0522D] flex items-center"><i class="fas fa-tint text-xl mr-2"></i>Pure & Wholesome Processing</h4>
                                     <p class="mt-2 text-gray-600">Zero-additive processing for uncompromised natural goodness.</p>
                                 </div>
                                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                    <h4 class="font-bold text-lg text-[#A0522D]">Ethical Farmer Empowerment</h4>
+                                    <h4 class="font-bold text-lg text-[#A0522D] flex items-center"><i class="fas fa-hand-holding-heart text-xl mr-2"></i>Ethical Farmer Empowerment</h4>
                                     <p class="mt-2 text-gray-600">Fair pricing and support for rural communities with every purchase.</p>
                                 </div>
                                 <div class="bg-white p-6 rounded-lg shadow-md border border-gray-200">
-                                    <h4 class="font-bold text-lg text-[#A0522D]">Innovation & Convenience</h4>
+                                    <h4 class="font-bold text-lg text-[#A0522D] flex items-center"><i class="fas fa-lightbulb text-xl mr-2"></i>Innovation & Convenience</h4>
                                     <p class="mt-2 text-gray-600">Modern, delicious products for contemporary healthy lifestyles.</p>
                                 </div>
                             </div>
@@ -322,9 +329,9 @@
                         <h4 class="text-xl font-bold mb-4">Let's Cultivate the Future of Food, Together.</h4>
                         <p class="text-gray-600 mb-6">We are actively seeking strategic buyers, channel partners, and co-branding collaborators. With our first export shipment ready by Q3 2025, the time to act is now.</p>
                         <div class="space-y-3 text-gray-700">
-                           <p><strong>Email:</strong> <a href="mailto:lakshmi.yarram@gmail.com" class="text-[#A0522D] hover:underline">lakshmi.yarram@gmail.com</a></p>
-                           <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/lakshmiyarram" target="_blank" class="text-[#A0522D] hover:underline">linkedin.com/in/lakshmiyarram</a></p>
-                           <p><strong>Phone:</strong> +91-XXXXXXXXXX</p>
+                           <p><strong><i class="fas fa-envelope mr-2"></i>Email:</strong> <a href="mailto:lakshmi.yarram@gmail.com" class="text-[#A0522D] hover:underline">lakshmi.yarram@gmail.com</a></p>
+                           <p><strong><i class="fab fa-linkedin mr-2"></i>LinkedIn:</strong> <a href="https://www.linkedin.com/in/lakshmiyarram" target="_blank" class="text-[#A0522D] hover:underline">linkedin.com/in/lakshmiyarram</a></p>
+                           <p><strong><i class="fas fa-phone mr-2"></i>Phone:</strong> +91-XXXXXXXXXX</p>
                         </div>
                         <a href="#" class="mt-6 inline-block w-full text-center bg-[#A0522D] text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-all">Request a Detailed Product Catalog</a>
                     </div>
@@ -339,10 +346,10 @@
             <p class="font-serif text-2xl text-[#E0A75E]">Grainasya</p>
             <p class="mt-2 text-sm text-gray-400">From Earth to Heart — Naturally.</p>
             <div class="mt-4 flex justify-center space-x-6">
-                <a href="#opportunity" class="hover:text-[#E0A75E]">Opportunity</a>
-                <a href="#products" class="hover:text-[#E0A75E]">Products</a>
-                <a href="#model" class="hover:text-[#E0A75E]">Model</a>
-                <a href="#partner" class="hover:text-[#E0A75E]">Partner</a>
+                <a href="#opportunity" id="footer-opportunity-link" class="hover:text-[#E0A75E]">Opportunity</a>
+                <a href="#products" id="footer-products-link" class="hover:text-[#E0A75E]">Products</a>
+                <a href="#model" id="footer-model-link" class="hover:text-[#E0A75E]">Model</a>
+                <a href="#partner" id="footer-partner-link" class="hover:text-[#E0A75E]">Partner</a>
             </div>
              <p class="mt-8 text-xs text-gray-500">&copy; 2025 Grainasya. All Rights Reserved.</p>
         </div>
@@ -363,25 +370,36 @@
                     <p id="modal-product-long-desc" class="text-gray-700 mb-4 leading-relaxed"></p>
                     <p id="modal-product-nutrition" class="text-gray-600 text-sm mb-4 border-t border-b border-gray-200 py-3 italic"></p>
                     
-                    <div class="space-y-4 mb-6">
+                    <form id="inquiry-form" class="space-y-4 mb-6">
                         <div>
                             <label for="inquiry-name" class="block text-sm font-medium text-gray-700">Your Name:</label>
-                            <input type="text" id="inquiry-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="John Doe">
+                            <input type="text" id="inquiry-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="John Doe" required>
                         </div>
                         <div>
                             <label for="inquiry-company" class="block text-sm font-medium text-gray-700">Company Name:</label>
-                            <input type="text" id="inquiry-company" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="ABC Foods Inc.">
+                            <input type="text" id="inquiry-company" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="ABC Foods Inc." required>
                         </div>
                         <div>
                             <label for="inquiry-email" class="block text-sm font-medium text-gray-700">Your Email:</label>
-                            <input type="email" id="inquiry-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="your.email@example.com">
+                            <input type="email" id="inquiry-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="your.email@example.com" required>
+                        </div>
+                        <div>
+                            <label for="inquiry-phone" class="block text-sm font-medium text-gray-700">Phone Number:</label>
+                            <div class="flex mt-1">
+                                <select id="inquiry-country-code" class="border border-gray-300 rounded-l-md shadow-sm p-2 bg-gray-50 flex-shrink-0">
+                                    <!-- Options populated by JS -->
+                                </select>
+                                <input type="tel" id="inquiry-phone" class="block w-full border border-gray-300 rounded-r-md shadow-sm p-2" placeholder="e.g., 9876543210" required>
+                            </div>
                         </div>
                         <div>
                             <label for="inquiry-quantity" class="block text-sm font-medium text-gray-700">Desired Quantity (MT or Kg):</label>
-                            <input type="text" id="inquiry-quantity" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="e.g., 5 MT or 5000 Kg">
+                            <input type="text" id="inquiry-quantity" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="e.g., 5 MT or 5000 Kg" required>
                         </div>
-                    </div>
+                        <p class="text-xs text-gray-500 italic mt-2">All inquiries will be verified through a follow-up process.</p>
+                    </form>
 
+                    <div id="inquiry-error-message" class="mt-3 text-center text-red-600 font-semibold hidden">Please fill in all required fields.</div>
                     <button id="modal-send-quote-request" class="w-full bg-[#A0522D] text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-colors">Send Quote Request</button>
                     <div id="quote-request-message" class="mt-3 text-center text-green-600 font-semibold hidden">Quote request sent successfully! We will contact you soon.</div>
                 </div>
@@ -546,7 +564,29 @@
                 margins: [240, 260, 300], // Example gross margins
                 buyPrices: [35, 45, 80], // Example buy prices in INR/Kg
                 sellPrices: [1.80, 2.20, 3.50], // Example sell prices in USD/Kg (simplified for demo)
-            }
+            },
+            countryCodes: [ // New data for country codes
+                { code: '+1', name: 'USA (+1)' },
+                { code: '+44', name: 'UK (+44)' },
+                { code: '+49', name: 'Germany (+49)' },
+                { code: '+91', name: 'India (+91)' },
+                { code: '+971', name: 'UAE (+971)' },
+                { code: '+61', name: 'Australia (+61)' },
+                { code: '+65', name: 'Singapore (+65)' },
+                { code: '+60', name: 'Malaysia (+60)' },
+                { code: '+81', name: 'Japan (+81)' },
+                { code: '+86', name: 'China (+86)' },
+                { code: '+33', name: 'France (+33)' },
+                { code: '+31', name: 'Netherlands (+31)' },
+                { code: '+82', name: 'South Korea (+82)' },
+                { code: '+84', name: 'Vietnam (+84)' },
+                { code: '+62', name: 'Indonesia (+62)' },
+                { code: '+63', name: 'Philippines (+63)' },
+                { code: '+66', name: 'Thailand (+66)' },
+                { code: '+886', name: 'Taiwan (+886)' },
+                { code: '+52', name: 'Mexico (+52)' },
+                { code: '+55', name: 'Brazil (+55)' }
+            ]
         };
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -564,14 +604,15 @@
                 });
                 document.querySelector(targetId).classList.add('active-section');
 
-                document.querySelectorAll('.nav-link').forEach(link => {
+                // Update active navigation link styles in header
+                document.querySelectorAll('nav a[href^="#"]').forEach(link => {
                     link.classList.remove('active');
                 });
-                const activeNavLink = document.querySelector(`.nav-link[href="${targetId}"]`);
+                const activeNavLink = document.querySelector(`nav a[href="${targetId}"]`);
                 if (activeNavLink) {
                     activeNavLink.classList.add('active');
                 }
-
+                
                 // Scroll to the top of the main content area (after hero) for "new page" feel
                 const mainContentTop = document.querySelector('main').offsetTop;
                 window.scrollTo({
@@ -586,8 +627,8 @@
                 }
             };
 
-            // Event listeners for navigation links (both desktop and mobile)
-            const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
+            // Event listeners for navigation links (both desktop, mobile, and FOOTER)
+            const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"], footer a[href^="#"]');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -787,17 +828,21 @@
             const productDetailModal = document.getElementById('product-detail-modal');
             const closeModalButton = document.getElementById('close-modal-button');
             const modalProductName = document.getElementById('modal-product-name');
-            const modalProductPriceInfo = document.getElementById('modal-product-price'); // Changed ID to avoid conflict with `modal-product-price` text
+            const modalProductPriceInfo = document.getElementById('modal-product-price');
             const modalProductImage = document.getElementById('modal-product-image');
             const modalProductLongDesc = document.getElementById('modal-product-long-desc');
             const modalProductNutrition = document.getElementById('modal-product-nutrition');
             
+            const inquiryForm = document.getElementById('inquiry-form');
             const inquiryNameInput = document.getElementById('inquiry-name');
             const inquiryCompanyInput = document.getElementById('inquiry-company');
             const inquiryEmailInput = document.getElementById('inquiry-email');
+            const inquiryCountryCodeSelect = document.getElementById('inquiry-country-code');
+            const inquiryPhoneInput = document.getElementById('inquiry-phone');
             const inquiryQuantityInput = document.getElementById('inquiry-quantity');
             const modalSendQuoteRequestButton = document.getElementById('modal-send-quote-request');
             const quoteRequestMessage = document.getElementById('quote-request-message');
+            const inquiryErrorMessage = document.getElementById('inquiry-error-message');
 
 
             const openProductDetailModal = (productId) => {
@@ -806,23 +851,33 @@
 
                 // Populate modal content
                 modalProductName.textContent = product.name;
-                // No specific price, display "Price varies by order size. Inquire for a custom quote."
                 modalProductImage.src = product.img;
                 modalProductImage.alt = product.name;
                 modalProductLongDesc.textContent = product.longDesc;
                 modalProductNutrition.textContent = `Nutritional Info: ${product.nutritionFacts}`;
 
-                // Clear form inputs when opening modal
-                inquiryNameInput.value = '';
-                inquiryCompanyInput.value = '';
-                inquiryEmailInput.value = '';
-                inquiryQuantityInput.value = '';
+                // Populate country codes
+                inquiryCountryCodeSelect.innerHTML = '';
+                appData.countryCodes.forEach(country => {
+                    const option = document.createElement('option');
+                    option.value = country.code;
+                    option.textContent = country.name;
+                    inquiryCountryCodeSelect.appendChild(option);
+                });
+                const defaultCountryCode = appData.countryCodes.find(c => c.code === '+91') || appData.countryCodes[0];
+                if (defaultCountryCode) {
+                    inquiryCountryCodeSelect.value = defaultCountryCode.code;
+                }
 
-                // Reset button and message
+                // Clear form inputs when opening modal
+                inquiryForm.reset(); // Resets all form fields
+                
+                // Reset button and message states
                 modalSendQuoteRequestButton.textContent = 'Send Quote Request';
                 modalSendQuoteRequestButton.classList.remove('bg-green-500', 'hover:bg-green-600');
                 modalSendQuoteRequestButton.classList.add('bg-[#A0522D]', 'hover:bg-[#739072]');
                 quoteRequestMessage.classList.add('hidden');
+                inquiryErrorMessage.classList.add('hidden');
 
                 // Show modal
                 productDetailModal.classList.add('open');
@@ -846,9 +901,15 @@
 
             // Send Quote Request button functionality inside modal
             modalSendQuoteRequestButton.addEventListener('click', () => {
-                // Basic validation (can be expanded)
-                if (!inquiryNameInput.value || !inquiryCompanyInput.value || !inquiryEmailInput.value || !inquiryQuantityInput.value) {
-                    alert('Please fill in all inquiry fields.'); // Using alert for simplicity; would use custom modal in production
+                // Clear previous messages
+                quoteRequestMessage.classList.add('hidden');
+                inquiryErrorMessage.classList.add('hidden');
+
+                // Check form validity using HTML5 validation API
+                if (!inquiryForm.checkValidity()) {
+                    inquiryErrorMessage.classList.remove('hidden'); // Show error message
+                    // Trigger browser's default validation messages
+                    inquiryForm.reportValidity(); 
                     return;
                 }
 
@@ -858,6 +919,7 @@
                     name: inquiryNameInput.value,
                     company: inquiryCompanyInput.value,
                     email: inquiryEmailInput.value,
+                    phone: `${inquiryCountryCodeSelect.value}${inquiryPhoneInput.value}`, // Combined phone number
                     quantity: inquiryQuantityInput.value
                 });
 
@@ -866,10 +928,11 @@
                 modalSendQuoteRequestButton.classList.add('bg-green-500', 'hover:bg-green-600');
                 quoteRequestMessage.classList.remove('hidden');
                 
+                // Hide messages and close modal after successful submission
                 setTimeout(() => {
                     quoteRequestMessage.classList.add('hidden');
-                    // closeProductDetailModal(); // Optionally close modal after sending
-                }, 3000); // Message disappears after 3 seconds
+                    closeProductDetailModal(); 
+                }, 3000); // Message disappears and modal closes after 3 seconds
             });
 
 
@@ -880,4 +943,3 @@
     </script>
 </body>
 </html>
-<!-- END OF HTML FILE -->
