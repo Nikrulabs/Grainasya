@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grainasya: Exporting Sustainable Indian Millets</title>
+    <title>Grainasya: Interactive Business Report</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -89,7 +89,8 @@
                         <h3 class="text-2xl font-bold mb-4 text-center md:text-left">Strategic Target Markets</h3>
                         <p class="text-gray-600 mb-6 text-center md:text-left">Our strategy is data-driven, targeting key regions where demand aligns with our strengths. Click on a region to explore our tailored approach.</p>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div class="bg-gray-200 rounded-lg p-4 relative h-64 md:h-80 bg-cover" style="background-image: url('https://placehold.co/600x400/E0A75E/3C3633?text=World+Map');">
+                            <!-- UPDATED BACKGROUND IMAGE FOR THE MAP HERE -->
+                            <div class="bg-gray-200 rounded-lg p-4 relative h-64 md:h-80 bg-cover" style="background-image: url('https://placehold.co/600x400/E0A75E/3C3633?text='); background-size: cover; background-position: center;">
                                 <div class="map-pin" data-market="usa" style="top: 30%; left: 20%;"></div>
                                 <div class="map-pin" data-market="eu" style="top: 25%; left: 48%;"></div>
                                 <div class="map-pin" data-market="gcc" style="top: 55%; left: 60%;"></div>
@@ -182,46 +183,6 @@
                                     <p class="mt-2 text-gray-600">Modern, delicious products for contemporary healthy lifestyles.</p>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="strategy" class="py-16 md:py-24 bg-white">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold">Our Global Go-to-Market Strategy</h2>
-                    <p class="mt-4 text-lg text-gray-600">We have a clear, phased strategy to maximize global reach and ensure sustainable growth. This section outlines our approach to market entry and the robust, profitable revenue model that underpins our operations.</p>
-                </div>
-                <div class="mt-16 grid lg:grid-cols-5 gap-12 items-center">
-                    <div class="lg:col-span-3">
-                        <h3 class="text-2xl font-bold mb-6 text-center">Multi-Channel Sales Phases</h3>
-                        <div class="flex flex-col md:flex-row justify-center space-y-8 md:space-y-0 md:space-x-4">
-                             <div class="flex-1 text-center p-4">
-                                <div class="font-bold text-white bg-[#A0522D] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">1</div>
-                                <h4 class="font-bold text-lg">B2B Penetration</h4>
-                                <p class="text-sm text-gray-600">Leverage B2B platforms, trade meets, and direct importer partnerships for foundational volume.</p>
-                            </div>
-                             <div class="hidden md:block self-center text-gray-300 text-2xl font-bold">→</div>
-                             <div class="flex-1 text-center p-4">
-                                <div class="font-bold text-white bg-[#739072] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">2</div>
-                                <h4 class="font-bold text-lg">Retail Expansion</h4>
-                                <p class="text-sm text-gray-600">Enter e-commerce, ethnic retail, and specialty health stores to build brand awareness.</p>
-                            </div>
-                             <div class="hidden md:block self-center text-gray-300 text-2xl font-bold">→</div>
-                             <div class="flex-1 text-center p-4">
-                                <div class="font-bold text-white bg-[#E0A75E] rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4 text-2xl">3</div>
-                                <h4 class="font-bold text-lg">Strategic Partnerships</h4>
-                                <p class="text-sm text-gray-600">Achieve scale via white-labeling, JVs, and institutional sales.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="lg:col-span-2">
-                        <h3 class="text-2xl font-bold mb-4 text-center">Profitability Snapshot</h3>
-                        <p class="text-sm text-gray-600 text-center mb-4">Hover over bars for details. Our model is built for profitable, scalable growth.</p>
-                        <div class="chart-container h-80">
-                            <canvas id="revenueChart"></canvas>
                         </div>
                     </div>
                 </div>
@@ -512,3 +473,4 @@
     </script>
 </body>
 </html>
+<!-- END OF HTML FILE -->
