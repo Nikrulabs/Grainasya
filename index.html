@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grainasya: Interactive Business Report</title>
+    <title>Grainasya: Global Millet Exports - Bulk Orders</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,18 +40,55 @@
         .main-content-section:not(.active-section) {
             display: none;
         }
+
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow-y: auto; /* Allow scrolling for modal content */
+        }
+        .modal-content {
+            background-color: #FDFBF6;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            transform: scale(0.95);
+            opacity: 0;
+            transition: all 0.3s ease-out;
+        }
+        .modal-overlay.open .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #3C3633;
+            transition: color 0.2s ease;
+        }
+        .modal-close-button:hover {
+            color: #A0522D;
+        }
     </style>
 </head>
 <body class="bg-[#FDFBF6] text-[#3C3633]">
     <!-- Chosen Palette: Earth & Harvest -->
-    <!-- Application Structure Plan: A 'narrative dashboard' structure was chosen over a linear slide-by-slide format to empower user-led exploration. This design guides a potential partner from the high-level 'Why' (Opportunity) to the detailed 'What' (Products) and 'How' (Model & Strategy), culminating in a clear 'Who/Next' (Founder & CTA). A sticky navigation allows non-linear access to key sections, catering to different user priorities (e.g., a buyer might jump to 'Products', an investor to 'Strategy'). This architecture transforms a static pitch into an engaging, interactive discovery tool, making complex information digestible and accessible. -->
-    <!-- Visualization & Content Choices: 
-        - Opportunity Section: Report Info (Market Size, India's Share, Target Markets) -> Goal (Convince of potential) -> Viz (Dynamic cards, Pie Chart, Interactive Map) -> Interaction (Click map regions to reveal detailed text) -> Justification (Makes abstract data tangible and geographically relevant) -> Library (Chart.js for pie chart, Vanilla JS for map interaction).
-        - Product Section: Report Info (Product List) -> Goal (Showcase range and details) -> Viz (Filterable grid of product cards) -> Interaction (Click category buttons to filter products) -> Justification (Transforms a long list into an organized, explorable catalog) -> Library (Vanilla JS).
-        - Model Section: Report Info (Sourcing, Certs, Brand Values) -> Goal (Build trust and show operational excellence) -> Viz (HTML/CSS Flowchart, Logo Grid, Icon-based Value Cards) -> Interaction (Static visual display) -> Justification (Visually breaks down complex processes and concepts into easy-to-understand diagrams) -> Library (None).
-        - Strategy Section: Report Info (Sales Phases, Revenue Margins) -> Goal (Demonstrate clear GTM plan and profitability) -> Viz (Phased Diagram, Interactive Bar Chart) -> Interaction (Hover over bars to see detailed revenue data) -> Justification (Clarifies strategic phasing and makes financial data interactive and less intimidating) -> Library (Chart.js for bar chart).
-    -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <header id="header" class="bg-[#FDFBF6]/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
@@ -80,12 +117,12 @@
             <div class="container mx-auto px-6 text-center bg-black/50 backdrop-blur-sm rounded-lg py-12">
                 <h1 class="text-4xl md:text-6xl font-bold text-white leading-tight">Unlocking Global Health & Sustainability</h1>
                 <p class="mt-4 text-lg md:text-xl text-gray-200">Transforming ancient Indian millets into a contemporary, nourishing, and eco-conscious food solution for the world.</p>
-                <a href="#opportunity" class="mt-8 inline-block bg-[#A0522D] text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-transform hover:scale-105">Explore the Opportunity</a>
+                <a href="#products" class="mt-8 inline-block bg-[#A0522D] text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-transform hover:scale-105">Explore Our Products</a>
             </div>
         </section>
 
         <!-- Main content sections, now managed by JS for "sub-page" effect -->
-        <section id="opportunity" class="py-16 md:py-24 main-content-section">
+        <section id="opportunity" class="py-16 md:py-24 main-content-section active-section">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
                     <h2 class="text-3xl md:text-4xl font-bold">A Confluence of Global Trends</h2>
@@ -150,12 +187,13 @@
         <section id="products" class="py-16 md:py-24 bg-white main-content-section">
             <div class="container mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto">
-                    <h2 class="text-3xl md:text-4xl font-bold">From Grain to Gastronomy</h2>
-                    <p class="mt-4 text-lg text-gray-600">Our diverse product portfolio is designed to meet global needs, offering everything from premium raw grains to innovative, convenient food solutions. Explore our categories to discover how Grainasya is bringing wholesome goodness to the world's tables.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold">Our Global Millet Product Portfolio</h2>
+                    <p class="mt-4 text-lg text-gray-600">Explore our curated selection of premium millet products, crafted to bring ancient nutrition and modern convenience to your table. We offer diverse options, primarily focusing on **bulk orders** to support your business needs. Please inquire for detailed quotes.</p>
                 </div>
                 <div id="product-filters" class="mt-10 flex flex-wrap justify-center gap-2 md:gap-4">
                 </div>
                 <div id="product-grid" class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    <!-- Product cards will be dynamically inserted here -->
                 </div>
             </div>
         </section>
@@ -310,6 +348,47 @@
         </div>
     </footer>
 
+    <!-- Product Detail Modal Structure -->
+    <div id="product-detail-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-modal-button">&times;</button>
+            <div class="md:flex md:space-x-8">
+                <div class="md:w-1/2">
+                    <img id="modal-product-image" src="" alt="Product Image" class="w-full h-auto rounded-lg mb-4">
+                    <!-- Future: Add image gallery/carousel here -->
+                </div>
+                <div class="md:w-1/2">
+                    <h3 id="modal-product-name" class="text-3xl font-bold mb-2"></h3>
+                    <p id="modal-product-price" class="text-2xl text-[#A0522D] font-semibold mb-4">Price varies by order size. Inquire for a custom quote.</p>
+                    <p id="modal-product-long-desc" class="text-gray-700 mb-4 leading-relaxed"></p>
+                    <p id="modal-product-nutrition" class="text-gray-600 text-sm mb-4 border-t border-b border-gray-200 py-3 italic"></p>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label for="inquiry-name" class="block text-sm font-medium text-gray-700">Your Name:</label>
+                            <input type="text" id="inquiry-name" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="John Doe">
+                        </div>
+                        <div>
+                            <label for="inquiry-company" class="block text-sm font-medium text-gray-700">Company Name:</label>
+                            <input type="text" id="inquiry-company" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="ABC Foods Inc.">
+                        </div>
+                        <div>
+                            <label for="inquiry-email" class="block text-sm font-medium text-gray-700">Your Email:</label>
+                            <input type="email" id="inquiry-email" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="your.email@example.com">
+                        </div>
+                        <div>
+                            <label for="inquiry-quantity" class="block text-sm font-medium text-gray-700">Desired Quantity (MT or Kg):</label>
+                            <input type="text" id="inquiry-quantity" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2" placeholder="e.g., 5 MT or 5000 Kg">
+                        </div>
+                    </div>
+
+                    <button id="modal-send-quote-request" class="w-full bg-[#A0522D] text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-[#739072] transition-colors">Send Quote Request</button>
+                    <div id="quote-request-message" class="mt-3 text-center text-green-600 font-semibold hidden">Quote request sent successfully! We will contact you soon.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const appData = {
             marketData: {
@@ -339,17 +418,118 @@
                 }
             },
             products: [
-                { id: 1, category: 'Core Grains', name: 'Foxtail Millet', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Foxtail+Millet', desc: 'Rich in protein and iron; naturally gluten-free.' },
-                { id: 2, category: 'Core Grains', name: 'Finger Millet (Ragi)', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Ragi', desc: 'A powerhouse of calcium, iron, and dietary fiber.' },
-                { id: 3, category: 'Core Grains', name: 'Pearl Millet (Bajra)', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Bajra', desc: 'High in protein and magnesium, excellent for energy.' },
-                { id: 4, category: 'Millet Flours', name: 'Organic Ragi Atta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Ragi+Flour', desc: 'Finely ground, ideal for rotis, dosas, and baking.' },
-                { id: 5, category: 'Millet Flours', name: 'Multi-Millet Atta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Multi-Millet+Flour', desc: 'A custom blend for enhanced nutrition and versatility.' },
-                { id: 6, category: 'RTE Snacks', name: 'Millet Cookies', img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Millet+Cookies', desc: 'Baked with jaggery, preservative-free wholesome indulgence.' },
-                { id: 7, category: 'RTE Snacks', name: 'Roasted Millet Puffs', img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Millet+Puffs', desc: 'Lightly seasoned, a healthy alternative to fried snacks.' },
-                { id: 8, 'category': 'Instant & Convenience', name: 'Millet Porridge Mix', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Porridge+Mix', desc: 'Just add hot water for a quick, nutritious breakfast.' },
-                { id: 9, 'category': 'Instant & Convenience', name: 'Millet Baby Food', img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Baby+Food', desc: 'Specially formulated, nutrient-dense, and easily digestible.' },
-                { id: 10, 'category': 'Value-Added', name: 'Millet Noodles', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Millet+Noodles', desc: 'No MSG, quick-cook, and packed with millet goodness.' },
-                { id: 11, 'category': 'Value-Added', name: 'Millet Pasta', img: 'https://placehold.co/400x300/739072/FFFFFF?text=Millet+Pasta', desc: 'Gluten-free, high-protein alternative to wheat pasta.' },
+                { 
+                    id: 1, category: 'Core Grains', name: 'Foxtail Millet (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Foxtail+Millet',
+                    desc: 'Premium quality, sustainably sourced, rich in protein and iron; naturally gluten-free.',
+                    longDesc: 'Our premium Foxtail Millet is sustainably sourced and carefully processed to retain its natural goodness. An excellent gluten-free alternative, it is rich in protein, fiber, and essential minerals. Ideal for large-scale production of porridges, pilafs, or as a healthy rice substitute in various food products.',
+                    weightOptions: ['17.6 Oz', '35.3 Oz', '70.5 Oz', '176.3 Oz'], // Approx 500g, 1kg, 2kg, 5kg
+                    nutritionFacts: 'High in Protein, Dietary Fiber, Iron, Magnesium. Low Glycemic Index.'
+                },
+                { 
+                    id: 2, category: 'Core Grains', name: 'Finger Millet (Ragi) (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/739072/FFFFFF?text=Finger+Millet',
+                    desc: 'A powerhouse of calcium, iron, and dietary fiber; ideal for health-focused bulk applications.',
+                    longDesc: 'Grainasya Ragi, also known as Finger Millet, is a nutritional treasure, especially abundant in calcium—making it ideal for bone health applications. Its high fiber content aids digestion, while its low glycemic index helps manage blood sugar levels. A versatile grain for bulk production of traditional dishes, health drinks, or modern food formulations.',
+                    weightOptions: ['17.6 Oz', '35.3 Oz', '70.5 Oz'], // Approx 500g, 1kg, 2kg
+                    nutritionFacts: 'Excellent source of Calcium, Iron. High in Dietary Fiber. Good for bone health.'
+                },
+                { 
+                    id: 3, category: 'Core Grains', name: 'Pearl Millet (Bajra) (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Pearl+Millet',
+                    desc: 'High in protein and magnesium, excellent for energy; perfect for bulk food manufacturers.',
+                    longDesc: 'Our Pearl Millet (Bajra) is a robust and energy-rich grain, perfect for boosting stamina and overall vitality in bulk food products. It is packed with protein, essential amino acids, and minerals like magnesium and phosphorus. Its hearty flavor makes it a fantastic addition to large-scale savory dishes and baked goods production.',
+                    weightOptions: ['17.6 Oz', '35.3 Oz', '176.3 Oz'], // Approx 500g, 1kg, 5kg
+                    nutritionFacts: 'Rich in Protein, Magnesium, Phosphorus. Excellent Energy Source. Promotes heart health.'
+                },
+                { 
+                    id: 4, category: 'Millet Flours', name: 'Organic Ragi Atta (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Ragi+Atta',
+                    desc: 'Finely ground, certified organic, ideal for bulk production of gluten-free rotis, dosas, and baking mixes.',
+                    longDesc: 'Experience the pure goodness of our Organic Ragi Atta. Finely ground from organically cultivated Finger Millet, this flour is perfect for crafting traditional Indian breads like rotis and dosas, or for enriching your industrial baking recipes with a nutrient-dense, gluten-free base. Lab-tested for purity and quality for bulk supply.',
+                    weightOptions: ['35.3 Oz', '70.5 Oz', '176.3 Oz'], // Approx 1kg, 2kg, 5kg
+                    nutritionFacts: 'Certified Organic. High in Calcium & Fiber. Gluten-Free. Versatile for bulk baking.'
+                },
+                { 
+                    id: 5, category: 'Millet Flours', name: 'Multi-Millet Atta (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/739072/FFFFFF?text=Multi-Millet+Atta',
+                    desc: 'A custom blend for enhanced nutrition and versatility; perfect for large-scale food manufacturing.',
+                    longDesc: 'Our unique Multi-Millet Atta blend combines the nutritional benefits of several premium millets, offering a comprehensive health boost for industrial applications. This versatile flour is ideal for making nutrient-packed pancakes, bread, or fortifying any meal base in bulk. A perfect choice for food manufacturers seeking balanced nutrition and a gluten-free option.',
+                    weightOptions: ['35.3 Oz', '70.5 Oz', '176.3 Oz'], // Approx 1kg, 2kg, 5kg
+                    nutritionFacts: 'Blend of multiple millets for comprehensive nutrition. High in protein, fiber & minerals.'
+                },
+                { 
+                    id: 6, category: 'RTE Snacks', name: 'Millet Cookies (Jaggery) (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Millet+Cookies',
+                    desc: 'Baked with jaggery, preservative-free wholesome indulgence; available for bulk distribution.',
+                    longDesc: 'Indulge guilt-free with our delicious Millet Cookies, sweetened naturally with jaggery. These preservative-free treats are baked to perfection, offering a delightful crunch and wholesome goodness. Ideal for bulk distribution to health food stores, cafes, or as part of vending machine offerings.',
+                    weightOptions: ['5.3 Oz (150g)', '10.6 Oz (300g)'],
+                    nutritionFacts: 'Natural sweetener (Jaggery). No preservatives. Source of energy & fiber.'
+                },
+                { 
+                    id: 7, category: 'RTE Snacks', name: 'Roasted Millet Puffs (Savory) (Bulk)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Millet+Puffs',
+                    desc: 'Lightly seasoned, a healthy alternative to fried snacks; available for bulk packaging.',
+                    longDesc: 'Crunchy, savory, and incredibly healthy! Our Roasted Millet Puffs are lightly seasoned and oven-baked to create the perfect guilt-free snack. A superb alternative to unhealthy fried options, they are packed with nutrients and satisfying flavor. Perfect for bulk sale, repacking, or inclusion in snack boxes.',
+                    weightOptions: ['3.5 Oz (100g)', '7 Oz (200g)'],
+                    nutritionFacts: 'Low fat, high fiber. Good source of plant protein. Gluten-free snack.'
+                },
+                { 
+                    id: 8, 'category': 'Instant & Convenience', name: 'Instant Ragi Idli Mix', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Ragi+Idli+Mix',
+                    desc: 'Nutrient-rich, instant mix for traditional South Indian Idli with Ragi goodness.',
+                    longDesc: 'Our Instant Ragi Idli Mix brings the wholesome nutrition of Finger Millet (Ragi) to your table in minutes. This convenient mix allows for quick preparation of soft, fluffy Idlis, a staple South Indian breakfast, without compromising on health benefits. Ideal for bulk supply to food service providers or retail packing.',
+                    weightOptions: ['17.6 Oz', '35.3 Oz'],
+                    nutritionFacts: 'High in Calcium, Iron. Quick preparation. Gluten-friendly.'
+                },
+                { 
+                    id: 9, 'category': 'Instant & Convenience', name: 'Instant Foxtail Idli Mix', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/739072/FFFFFF?text=Foxtail+Idli+Mix',
+                    desc: 'Easy-to-prepare Idli mix, offering the benefits of Foxtail Millet for healthy meals.',
+                    longDesc: 'Discover the convenience and nutrition of our Instant Foxtail Idli Mix. This blend combines traditional flavor with the health benefits of Foxtail Millet, making it easy to prepare a wholesome meal. Perfect for those seeking quick, healthy options for their customers.',
+                    weightOptions: ['17.6 Oz', '35.3 Oz'],
+                    nutritionFacts: 'Good source of fiber and protein. Quick & convenient.'
+                },
+                { 
+                    id: 10, 'category': 'Instant & Convenience', name: 'Multi-Millet Porridge Mix', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Multi+Porridge',
+                    desc: 'A versatile, nutritious, and instant blend for a healthy breakfast or meal.',
+                    longDesc: 'Our Multi-Millet Porridge Mix is a powerhouse of nutrition, blending various millets for a balanced and wholesome start to the day. It\'s incredibly easy to prepare, requiring just hot water or milk, making it ideal for busy individuals or large-scale catering. Provides sustained energy and essential nutrients.',
+                    weightOptions: ['8.8 Oz', '17.6 Oz', '35.3 Oz'],
+                    nutritionFacts: 'High in complex carbohydrates & fiber. Sustained energy release. Rich in various minerals.'
+                },
+                { 
+                    id: 11, 'category': 'Instant & Convenience', name: 'Kodo Millet Porridge Mix', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Kodo+Porridge',
+                    desc: 'Single-grain instant porridge mix, focusing on the specific health benefits of Kodo Millet.',
+                    longDesc: 'Experience the unique benefits of Kodo Millet with our convenient instant porridge mix. Known for its rich fiber content and ease of digestion, Kodo Millet makes for a light yet fulfilling meal. This product is perfect for bulk supply to health-conscious consumers and institutions.',
+                    weightOptions: ['8.8 Oz', '17.6 Oz'],
+                    nutritionFacts: 'Excellent source of dietary fiber. Easy to digest. Aids blood sugar management.'
+                },
+                { 
+                    id: 12, 'category': 'Value-Added', name: 'Foxtail Millet Noodles', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/739072/FFFFFF?text=Foxtail+Noodles',
+                    desc: 'Healthy, gluten-free noodles made from Foxtail Millet; no MSG, quick-cook.',
+                    longDesc: 'Our Foxtail Millet Noodles offer a nutritious and delicious alternative to traditional wheat noodles. Made with the goodness of Foxtail Millet, they are gluten-free, quick-cooking, and contain no MSG or artificial additives. Perfect for a healthy and fast meal solution in bulk quantities.',
+                    weightOptions: ['6.3 Oz (180g)', '12.7 Oz (360g)'],
+                    nutritionFacts: 'No MSG. High fiber. Quick preparation. Healthy alternative to wheat noodles.'
+                },
+                { 
+                    id: 13, 'category': 'Value-Added', name: 'Pearl Millet Noodles', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/E0A75E/3C3633?text=Pearl+Noodles',
+                    desc: 'Hearty, high-protein noodles from Pearl Millet; a nutritious and versatile option.',
+                    longDesc: 'Enjoy the robust flavor and health benefits of Pearl Millet with our Pearl Millet Noodles. These noodles are a great source of plant-based protein and dietary fiber, offering a wholesome base for any stir-fry or soup. Gluten-free and easy to prepare for bulk consumption.',
+                    weightOptions: ['6.3 Oz (180g)', '12.7 Oz (360g)'],
+                    nutritionFacts: 'High in protein. Good source of fiber. Gluten-free. Versatile for various dishes.'
+                },
+                { 
+                    id: 14, 'category': 'Value-Added', name: 'Millet Pasta (Fusilli)', price: 'Quote', currency: 'USD',
+                    img: 'https://placehold.co/400x300/A0522D/FFFFFF?text=Millet+Pasta',
+                    desc: 'Gluten-free, high-protein alternative to wheat pasta; cooks al dente for perfect meals.',
+                    longDesc: 'Elevate your pasta dishes with Grainasya Millet Fusilli. A superb gluten-free and high-protein alternative to traditional wheat pasta, it offers a delightful texture and absorbs sauces beautifully. Made from wholesome millets, it\'s a nutritious choice for the whole family and available for bulk culinary use.',
+                    weightOptions: ['8.8 Oz', '17.6 Oz'], // Approx 250g, 500g
+                    nutritionFacts: 'Gluten-Free. High in protein. Excellent source of fiber. Cooks al dente.'
+                },
             ],
             certs: [
                 { name: 'FSSAI', img: 'https://placehold.co/100x60/EEEEEE/3C3633?text=FSSAI', status: 'Registered' },
@@ -370,7 +550,7 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Mobile menu toggle functionality
+            // --- General UI Functions ---
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => {
@@ -379,14 +559,11 @@
             
             // Function to show a specific content section and hide others
             const showSection = (targetId) => {
-                // Hide all main content sections except hero
                 document.querySelectorAll('.main-content-section').forEach(section => {
                     section.classList.remove('active-section');
                 });
-                // Show the target section
                 document.querySelector(targetId).classList.add('active-section');
 
-                // Update active navigation link styles
                 document.querySelectorAll('.nav-link').forEach(link => {
                     link.classList.remove('active');
                 });
@@ -402,11 +579,10 @@
                     behavior: 'smooth'
                 });
 
-                // Re-initialize charts when their sections become active if needed (defensive, as Chart.js usually handles resize)
-                if (targetId === '#opportunity') {
-                    initializeCharts(); // Re-initialize charts within the opportunity section
-                } else if (targetId === '#strategy') {
-                    initializeCharts(); // Re-initialize charts within the strategy section
+                // Re-initialize charts when their sections become active if needed
+                // This prevents issues where charts might not render correctly if their canvas is hidden on init
+                if (targetId === '#opportunity' || targetId === '#strategy') {
+                    initializeCharts(); 
                 }
             };
 
@@ -414,20 +590,24 @@
             const navLinks = document.querySelectorAll('nav a[href^="#"], #mobile-menu a[href^="#"]');
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
-                    e.preventDefault(); // Prevent default anchor link behavior
+                    e.preventDefault();
                     const targetId = link.getAttribute('href');
                     showSection(targetId);
-                    // Close mobile menu if open
-                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.add('hidden'); // Close mobile menu if open
                 });
             });
 
-            // Initialize charts function to be called on load and potentially on section activation
+            // --- Chart Initialization (common function for re-use) ---
             const initializeCharts = () => {
+                // Market Share Chart
                 const marketShareCanvas = document.getElementById('marketShareChart');
-                if (marketShareCanvas && !marketShareCanvas.chart) { // Check if canvas exists and chart not already initialized
+                if (marketShareCanvas) { 
+                    // Destroy existing chart instance if it exists to prevent re-initialization errors
+                    if (marketShareCanvas.chart) {
+                        marketShareCanvas.chart.destroy();
+                    }
                     const marketShareCtx = marketShareCanvas.getContext('2d');
-                    marketShareCanvas.chart = new Chart(marketShareCtx, { // Store chart instance on canvas
+                    marketShareCanvas.chart = new Chart(marketShareCtx, {
                         type: 'pie',
                         data: {
                             labels: ['India', 'Rest of World'],
@@ -453,14 +633,19 @@
                             }
                         }
                     });
-                } else if (marketShareCanvas && marketShareCanvas.chart) {
-                    marketShareCanvas.chart.update(); // If already exists, just update
+                } else {
+                    console.error("Canvas element with ID 'marketShareChart' not found. Market share chart will not be initialized.");
                 }
 
+                // Revenue Bar Chart
                 const revenueCanvas = document.getElementById('revenueChart');
-                if (revenueCanvas && !revenueCanvas.chart) { // Check if canvas exists and chart not already initialized
+                if (revenueCanvas) {
+                     // Destroy existing chart instance if it exists
+                    if (revenueCanvas.chart) {
+                        revenueCanvas.chart.destroy();
+                    }
                     const revenueCtx = revenueCanvas.getContext('2d');
-                    revenueCanvas.chart = new Chart(revenueCtx, { // Store chart instance on canvas
+                    revenueCanvas.chart = new Chart(revenueCtx, {
                         type: 'bar',
                         data: {
                             labels: appData.revenue.labels,
@@ -492,14 +677,14 @@
                             }
                         }
                     });
-                } else if (revenueCanvas && revenueCanvas.chart) {
-                    revenueCanvas.chart.update(); // If already exists, just update
+                } else {
+                    console.error("Canvas element with ID 'revenueChart' not found. Revenue chart will not be initialized.");
                 }
             };
 
 
-            // Interactive Market Cards Logic (replacing map pins)
-            const marketCards = document.querySelectorAll('.market-card'); // Select market cards
+            // --- Interactive Market Cards Logic (replacing map pins) ---
+            const marketCards = document.querySelectorAll('.market-card');
             const marketTitle = document.getElementById('market-title');
             const marketDrivers = document.getElementById('market-drivers');
             const marketFocusTitle = document.getElementById('market-focus-title');
@@ -507,7 +692,7 @@
             
             marketCards.forEach(card => {
                 card.addEventListener('click', (e) => {
-                    const marketId = e.currentTarget.dataset.market; // Use currentTarget to get the card element
+                    const marketId = e.currentTarget.dataset.market;
                     const data = appData.marketData[marketId];
                     
                     marketCards.forEach(c => c.classList.remove('active'));
@@ -519,12 +704,11 @@
                     marketFocus.textContent = data.focus;
                 });
             });
-            // Activate the first market card by default on load
             if (marketCards.length > 0) {
-                marketCards[0].click();
+                marketCards[0].click(); // Activate the first market card by default on load
             }
 
-            // Product Filtering Logic (existing functionality)
+            // --- Product Listing and Filtering Logic ---
             const productFiltersContainer = document.getElementById('product-filters');
             const productGrid = document.getElementById('product-grid');
             const categories = ['All', ...new Set(appData.products.map(p => p.category))];
@@ -552,12 +736,21 @@
                             <img src="${product.img}" alt="${product.name}" class="w-full h-48 object-cover">
                             <div class="p-4">
                                 <h4 class="text-lg font-semibold">${product.name}</h4>
-                                <p class="text-sm text-gray-600 mt-1">${product.desc}</p>
-                                <div class="mt-3 text-xs font-semibold text-[#A0522D]">${product.category}</div>
+                                <p class="text-gray-600 mt-1 mb-2">${product.desc}</p>
+                                <p class="text-xl font-bold text-[#A0522D] mb-3">${product.price === 'Quote' ? 'Price: By Quote' : `${product.currency} ${product.price.toFixed(2)}`}</p>
+                                <button class="inquire-button bg-[#739072] text-white px-4 py-2 rounded-md text-sm hover:bg-[#A0522D] transition-colors" data-product-id="${product.id}">Inquire for Bulk</button>
                             </div>
                         </div>
                     `;
                     productGrid.innerHTML += card;
+                });
+
+                // Attach event listeners for "Inquire for Bulk" buttons after rendering
+                document.querySelectorAll('.inquire-button').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const productId = parseInt(e.target.dataset.productId);
+                        openProductDetailModal(productId);
+                    });
                 });
             };
 
@@ -574,9 +767,9 @@
                     e.target.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
                 }
             });
-            renderProducts('All');
+            renderProducts('All'); // Initial render of all products
             
-            // Render Certifications Grid (existing functionality)
+            // --- Certifications Grid Logic (existing functionality) ---
             const certsGrid = document.getElementById('certs-grid');
             appData.certs.forEach(cert => {
                 const certEl = `
@@ -590,10 +783,99 @@
                 certsGrid.innerHTML += certEl;
             });
 
+            // --- Product Detail Modal Logic (Now for Bulk Inquiries) ---
+            const productDetailModal = document.getElementById('product-detail-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const modalProductName = document.getElementById('modal-product-name');
+            const modalProductPriceInfo = document.getElementById('modal-product-price'); // Changed ID to avoid conflict with `modal-product-price` text
+            const modalProductImage = document.getElementById('modal-product-image');
+            const modalProductLongDesc = document.getElementById('modal-product-long-desc');
+            const modalProductNutrition = document.getElementById('modal-product-nutrition');
+            
+            const inquiryNameInput = document.getElementById('inquiry-name');
+            const inquiryCompanyInput = document.getElementById('inquiry-company');
+            const inquiryEmailInput = document.getElementById('inquiry-email');
+            const inquiryQuantityInput = document.getElementById('inquiry-quantity');
+            const modalSendQuoteRequestButton = document.getElementById('modal-send-quote-request');
+            const quoteRequestMessage = document.getElementById('quote-request-message');
+
+
+            const openProductDetailModal = (productId) => {
+                const product = appData.products.find(p => p.id === productId);
+                if (!product) return;
+
+                // Populate modal content
+                modalProductName.textContent = product.name;
+                // No specific price, display "Price varies by order size. Inquire for a custom quote."
+                modalProductImage.src = product.img;
+                modalProductImage.alt = product.name;
+                modalProductLongDesc.textContent = product.longDesc;
+                modalProductNutrition.textContent = `Nutritional Info: ${product.nutritionFacts}`;
+
+                // Clear form inputs when opening modal
+                inquiryNameInput.value = '';
+                inquiryCompanyInput.value = '';
+                inquiryEmailInput.value = '';
+                inquiryQuantityInput.value = '';
+
+                // Reset button and message
+                modalSendQuoteRequestButton.textContent = 'Send Quote Request';
+                modalSendQuoteRequestButton.classList.remove('bg-green-500', 'hover:bg-green-600');
+                modalSendQuoteRequestButton.classList.add('bg-[#A0522D]', 'hover:bg-[#739072]');
+                quoteRequestMessage.classList.add('hidden');
+
+                // Show modal
+                productDetailModal.classList.add('open');
+                productDetailModal.classList.remove('hidden');
+            };
+
+            const closeProductDetailModal = () => {
+                productDetailModal.classList.remove('open');
+                setTimeout(() => {
+                    productDetailModal.classList.add('hidden');
+                }, 300);
+            };
+
+            closeModalButton.addEventListener('click', closeProductDetailModal);
+
+            productDetailModal.addEventListener('click', (e) => {
+                if (e.target === productDetailModal) {
+                    closeProductDetailModal();
+                }
+            });
+
+            // Send Quote Request button functionality inside modal
+            modalSendQuoteRequestButton.addEventListener('click', () => {
+                // Basic validation (can be expanded)
+                if (!inquiryNameInput.value || !inquiryCompanyInput.value || !inquiryEmailInput.value || !inquiryQuantityInput.value) {
+                    alert('Please fill in all inquiry fields.'); // Using alert for simplicity; would use custom modal in production
+                    return;
+                }
+
+                // Simulate sending request (in a real app, this would be an API call)
+                console.log('Quote Request Data:', {
+                    productName: modalProductName.textContent,
+                    name: inquiryNameInput.value,
+                    company: inquiryCompanyInput.value,
+                    email: inquiryEmailInput.value,
+                    quantity: inquiryQuantityInput.value
+                });
+
+                modalSendQuoteRequestButton.textContent = 'Request Sent!';
+                modalSendQuoteRequestButton.classList.remove('bg-[#A0522D]', 'hover:bg-[#739072]');
+                modalSendQuoteRequestButton.classList.add('bg-green-500', 'hover:bg-green-600');
+                quoteRequestMessage.classList.remove('hidden');
+                
+                setTimeout(() => {
+                    quoteRequestMessage.classList.add('hidden');
+                    // closeProductDetailModal(); // Optionally close modal after sending
+                }, 3000); // Message disappears after 3 seconds
+            });
+
+
             // Initial load: show the first section and initialize charts
             showSection('#opportunity'); 
-            initializeCharts(); // Call charts initialization after initial section is shown
-
+            // initializeCharts() is called by showSection() when #opportunity is activated.
         });
     </script>
 </body>
